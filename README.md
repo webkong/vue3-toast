@@ -55,7 +55,7 @@ app.mount("#app");
 }
 ```
 
-### More
+### Config
 
 `toast` or `$wkToast` takes 2 parameter: `(message, [options])`
 
