@@ -1,6 +1,5 @@
 export type HorizontalPosition = 'left' | 'right' | 'center';
 export type VerticalPosition = 'top' | 'bottom';
-// export type ToastMode = 'override' | 'queue';
 
 export interface ToastOptions {
 
@@ -23,11 +22,6 @@ export interface ToastOptions {
    * The duration one toast will last, in milliseconds
    */
   duration?: number;
-
-  /** TODO
-   * If override, the last toast will forcibly flush previous toasts, otherwise it is queued after others
-   */
-  // mode?: ToastMode;
 
   /**
    * Built-in transitions: fade, slide-[up/down/left/right]. See also Transitions

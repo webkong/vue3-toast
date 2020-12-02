@@ -7,6 +7,6 @@ import * as Toast from './toast';
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $toast: (message: string, options?: Toast.ToastOptions) => any;
+    $wkToast: (message: string, options?: Toast.ToastOptions) => any;
   }
 }

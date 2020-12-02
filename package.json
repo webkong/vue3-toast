@@ -1,11 +1,11 @@
 {
   "name": "vue3-toast-single",
-  "version": "0.0.6",
+  "version": "1.0.1",
   "scripts": {
     "build": "rollup -c"
   },
   "description": "A toast plugin for vue3, support composition API.",
-  "main": "index.js",
+  "main": "dist/index.esm.js",
   "directories": {
     "example": "example",
     "test": "test"

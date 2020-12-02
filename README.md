@@ -4,13 +4,13 @@
 
 A toast plugin for vue3. Support composition API.
 
-[DEMO](https://blog.webkong.cn/vue3-toast/example/index.html)
+See the [example](https://blog.webkong.cn/vue3-toast/example/index.html).
 
 **Note:**
 
 Issue/PR is welcomed, I'll response as soon as possible.
 
-If you like it, can give a star.
+If you like this plugin, can give a star.
 
 ## Usage
 

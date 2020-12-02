@@ -17,7 +17,7 @@ class Toast {
   }
   show(text, config = {}) {
     let [toastWrapper, toastVM] = [null, null];
-    const id = "wk-toast_" + seed++;
+    const id = "wk-toast-" + seed++;
     toastWrapper = document.createElement("div");
     toastWrapper.id = id;
     toastVM = createVNode(

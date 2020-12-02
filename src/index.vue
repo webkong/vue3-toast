@@ -42,7 +42,7 @@ export default defineComponent({
       state.classes = setClass();
       setTimeout(() => {
         state.showing = true;
-      }, 100);
+      }, 10);
       timeoutId = setTimeout(() => {
         state.showing = false;
       }, options.duration);
