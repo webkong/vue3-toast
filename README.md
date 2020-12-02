@@ -4,11 +4,13 @@
 
 A toast plugin for vue3. Support composition API.
 
-[DEMO](https://wekbong.github.io/vue3-toast-single/example/index.html)
+[DEMO](https://blog.webkong.cn/vue3-toast/example/index.html)
 
 **Note:**
 
 Issue/PR is welcomed, I'll response as soon as possible.
+
+If you like it, can give a star.
 
 ## Usage
 
@@ -62,11 +64,11 @@ app.mount("#app");
 Parameter | Type |Default| Description
 --------- | ---- | ------|-----------
 className | `string`, `array` | | Self-defined class names to pass through. There are 3 pre-defined classes: `wk-info`, `wk-warn`,`wk-alert`, to toast with different background color
-horizontalPosition | `string` | `right` | Position horizontal of toast. There are 3 pre-defined positions: `left`, `right` and `center`
-verticalPosition | `string` | `top` | Position vertical of toast. There are 2 pre-defined positions: `top` and `bottom`
-duration | `number` | 5000 | The duration one toast will last, in milliseconds
+horizontalPosition | `string` | `center` | Position horizontal of toast. There are 3 pre-defined positions: `left`, `right` and `center`
+verticalPosition | `string` | `bottom` | Position vertical of toast. There are 2 pre-defined positions: `top` and `bottom`
+duration | `number` | 3000 | The duration one toast will last, in milliseconds
 closeable | `boolean` | `false` | `true` or `false`. If `true`, the toast can be closed manually
-transition | `string` | `fade` | Built-in transitions: `fade`, `slide-[up/down/left/right]`. See also [Transitions](http://v1.vuejs.org/guide/transitions.html)
+transition | `string` | `slide-down` | Built-in transitions: `fade`, `slide-[up/down/left/right]`. See also [Transitions](http://v1.vuejs.org/guide/transitions.html)
 
 #### Styling
 

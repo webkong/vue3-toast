@@ -125,7 +125,9 @@ export default defineComponent({
   top: 80%;
 }
 .wk-content {
+  display: block;
   text-align: center;
+  flex: 1;
 }
 .wk-wrapper .wk-close {
   margin-right: 5px;
