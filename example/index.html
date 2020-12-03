@@ -71,7 +71,13 @@
         },
       },
     });
-    app.use(WKToast, { duration: 2000 });
+    app.use(WKToast, {
+      duration: 3000,
+      transition: "slide-right",
+      verticalPosition: "top",
+      horizontalPosition: "right",
+      closeable: true,
+    });
     app.mount("#app");
   </script>
 </html>

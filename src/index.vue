@@ -17,6 +17,9 @@ import {
   onMounted,
   onUnmounted,
   defineComponent,
+  watch,
+  ref,
+  computed,
 } from "vue";
 export default defineComponent({
   name: "wk-toast",
@@ -31,34 +34,14 @@ export default defineComponent({
     closeable: Boolean,
   },
   setup(props) {
+    const options = props;
     let refNode = null;
-    let timeoutId = null;
     const state = reactive({
       option: {},
       showing: false,
-      classes: [],
+      timer: null,
     });
-    onMounted(() => {
-      state.classes = setClass();
-      setTimeout(() => {
-        state.showing = true;
-      }, 10);
-      timeoutId = setTimeout(() => {
-        state.showing = false;
-      }, options.duration);
-      if (refNode) {
-        refNode.addEventListener("transitionend", removeHandler, false);
-      }
-    });
-    onUnmounted(() => {
-      clearTimeout(timeoutId);
-    });
-    const options = props;
-    const removeHandler = () => {
-      document.body.removeChild(document.getElementById(props.id));
-      refNode.removeEventListener("transitionend", removeHandler, false);
-    };
-    const setClass = () => {
+    const classes = computed(() => {
       let clazz = [];
       let className = options.className;
       let horizontalPosition = options.horizontalPosition;
@@ -83,18 +66,55 @@ export default defineComponent({
         clazz.push(`wk-${verticalPosition}`);
       }
       return clazz.join(" ");
-    };
+    });
+    console.log(classes);
+    let closed = ref(false);
 
+    onMounted(() => {
+      startTimer();
+      state.showing = true;
+    });
+    onUnmounted(() => {
+      clearTimeout(state.timer);
+    });
+
+    const startTimer = () => {
+      console.log("start timer");
+      if (options.duration > 0) {
+        state.timer = setTimeout(() => {
+          console.log("start timer2");
+          console.log(closed);
+          if (!closed.value) {
+            close();
+          }
+        }, options.duration);
+      }
+    };
     const close = () => {
+      closed.value = true;
+      state.timer = null;
+    };
+    const removeHandler = () => {
       state.showing = false;
+      document.body.removeChild(document.getElementById(props.id));
+      refNode.removeEventListener("transitionend", removeHandler, false);
     };
     const setRefNode = (el) => {
       refNode = el;
     };
+    watch(closed, (newVal) => {
+      console.log("closed:", newVal);
+      if (newVal) {
+        state.showing = false;
+        refNode.addEventListener("transitionend", removeHandler, false);
+      }
+    });
 
     return {
       setRefNode,
       close,
+      closed,
+      classes,
       options,
       ...toRefs(state),
     };
@@ -169,63 +189,64 @@ export default defineComponent({
 .wk-wrapper.wk-info {
   background-color: rgba(32, 83, 201, 0.7);
 }
-.fade-enter-active,
-.fade-leave-active,
-.fade-transition {
-  -webkit-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
+/* animation */
+
+.slide-down-enter-active {
+  transition: all 0.3s ease-out;
 }
-.fade-enter,
-.fade-leave,
-.fade-leave-active {
-  opacity: 0;
+.slide-down-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-down-enter-active,
-.slide-down-leave-active,
-.slide-down-transition {
-  -webkit-transition: opacity 0.3s ease, bottom 0.3s ease-in;
-  transition: opacity 0.3s ease, bottom 0.3s ease-in;
-}
-.slide-down-leave-active,
-.slide-down-enter,
-.slide-down-leave {
+.slide-down-enter-from,
+.slide-down-leave-to {
   opacity: 0;
   bottom: -10% !important;
 }
-.slide-up-enter-active,
-.slide-up-leave-active,
-.slide-up-transition {
-  -webkit-transition: opacity 0.3s ease, top 0.3s ease-in;
-  transition: opacity 0.3s ease, top 0.3s ease-in;
+
+.slide-up-enter-active {
+  transition: all 0.3s ease-out;
 }
-.slide-up-leave-active,
-.slide-up-enter,
-.slide-up-leave {
+.slide-up-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-up-enter-from,
+.slide-up-leave-to {
   opacity: 0;
   top: -10% !important;
 }
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-left-transition {
-  -webkit-transition: opacity 0.3s ease, left 0.3s ease-in;
-  transition: opacity 0.3s ease, left 0.3s ease-in;
+
+.slide-left-enter-active {
+  transition: all 0.3s ease-out;
 }
-.slide-left-leave-active,
-.slide-left-enter,
-.slide-left-leave {
+.slide-left-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-left-enter-from,
+.slide-left-leave-to {
   opacity: 0;
   left: -10% !important;
 }
-.slide-right-enter-active,
-.slide-right-leave-active,
-.slide-right-transition {
-  -webkit-transition: opacity 0.3s ease, right 0.3s ease;
-  transition: opacity 0.3s ease, right 0.3s ease;
+
+.slide-right-enter-active {
+  transition: all 0.3s ease-out;
 }
-.slide-right-leave-active,
-.slide-right-enter,
-.slide-right-leave {
+.slide-right-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-right-enter-from,
+.slide-right-leave-to {
   opacity: 0;
   right: -10px !important;
+}
+
+.fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+.fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
