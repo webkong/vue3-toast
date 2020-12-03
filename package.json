@@ -16,7 +16,7 @@
     "url": "git+https://github.com/webkong/vue3-toast.git"
   },
   "publishConfig": {
-    "registry": "https://www.npmjs.com"
+    "registry": "https://registry.npmjs.org/"
   },
   "typings": "types/index.d.ts",
   "keywords": [
