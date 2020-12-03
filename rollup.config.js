@@ -1,12 +1,9 @@
 const path = require("path");
-const { buble } = require("@rollup/plugin-buble");
 const { babel } = require("@rollup/plugin-babel");
 const { nodeResolve } = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
 const vue = require("rollup-plugin-vue");
 const css = require("rollup-plugin-css-only");
-const scss = require("rollup-plugin-scss");
-const replace = require("@rollup/plugin-replace");
 const { terser } = require("rollup-plugin-terser");
 const image = require("@rollup/plugin-image");
 const clear = require("rollup-plugin-clear");
@@ -28,7 +25,6 @@ const plugins = [
   nodeResolve(),
   commonjs(),
   babel(babelOptions),
-  // buble(),
   terser(),
 ];
 module.exports = [
